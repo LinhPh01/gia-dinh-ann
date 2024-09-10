@@ -230,7 +230,7 @@ const Listproduct = () => {
                             className="w-full h-full"
                           />
                         </Box>
-                        <div className="zui-bg-sheet rounded-2xl p-4">
+                        <div className="zui-bg-sheet rounded-b-2xl p-4">
                           <div className="flex flex-cols-2 items-center justify-between">
                             <Box>
                               <Text size="xxSmall text-white">Quy đổi với</Text>
