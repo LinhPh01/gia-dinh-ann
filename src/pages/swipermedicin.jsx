@@ -118,7 +118,7 @@ const Swipermedicin = () => {
             clickable: true,
             el: null,
           }}
-          slidesPerView={1.9}
+          slidesPerView={2.4}
           spaceBetween={0}
           className="px-4 swiper-container"
           direction="horizontal"
@@ -209,7 +209,7 @@ const Swipermedicin = () => {
             swipeToClose
             style={{ overflowY: "auto" }}
           >
-            <Box pb={4}>
+            <Box pb={4} className="zalo-mini">
               <Box
                 p={8}
                 className="custom-bottom-sheet"

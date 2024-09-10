@@ -215,7 +215,7 @@ const Listproduct = () => {
                     swipeToClose
                     style={{ overflowY: "auto" }}
                   >
-                    <Box pb={4}>
+                    <Box pb={4} className="zalo-mini">
                       <Box
                         p={8}
                         className="custom-bottom-sheet"

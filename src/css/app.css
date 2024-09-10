@@ -24,6 +24,9 @@
   border-radius: 8px;
   margin-bottom: 24px;
 }
+.zaui-routes {
+  background: white;
+}
 
 .zaui-list-item {
   cursor: pointer;
@@ -248,6 +251,9 @@ textarea:focus {
   width: 700px; /* Kích thước chiều rộng mong muốn của ứng dụng */
   max-width: 100%;
   margin: 0 auto;
+}
+.zaui-bottom-navigation-content {
+  background: #f0f9ff;
 }
 
 /* .toptop {

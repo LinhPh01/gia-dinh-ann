@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Text, Box, useSnackbar, Checkbox } from "zmp-ui";
+import { Text, Box, useSnackbar, Checkbox, Page } from "zmp-ui";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import {
@@ -415,196 +415,201 @@ const FormPage = () => {
   };
 
   return (
-    <Box className="bg-page-color zalo-mini ">
-      <HeaderEdit />
-      <Box mx={4} pb={10} mt-4>
-        <Box
-          flex
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          className="bg-page-color"
-        >
+    <Page className="relative flex-1 flex flex-col bg-page-color zalo-mini">
+      <Box className="flex-1 overflow-auto">
+        <HeaderEdit />
+        <Box mx={4} pb={10} mt={4}>
           <Box
             flex
-            flexDirection="row"
-            alignItems="center"
+            flexDirection="column"
             justifyContent="center"
+            alignItems="center"
+            className="bg-page-color"
           >
-            <Box>
-              <Text.Title style={{ color: "#06afaa" }}>{name}</Text.Title>
-            </Box>
-            <Box ml={2}>
-              <img
-                className="w-10 h-10 rounded-lg border-inset"
-                src={headerlogo}
-                alt=""
-              />
+            <Box
+              flex
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Box>
+                <Text.Title style={{ color: "#06afaa" }}>{name}</Text.Title>
+              </Box>
+              <Box ml={2}>
+                <img
+                  className="w-10 h-10 rounded-lg border-inset"
+                  src={headerlogo}
+                  alt=""
+                />
+              </Box>
             </Box>
           </Box>
-        </Box>
-        <Box mt={4} pb={4}>
-          <div className="px-10">
-            <div className="flex flex-col space-y-4">
-              <textarea
-                className="rounded-lg"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Tên người dùng"
-                style={{
-                  height: "45px",
-                  width: "100%",
-                  fontSize: "16px",
-                  resize: "none",
-                  padding: "12px",
-                  border: "2px solid #0ebeb8",
-                }}
-              />
-              <Box flex flexDirection="row" className="space-x-2">
-                <Checkbox
-                  checked={gender === "male"}
-                  onChange={() => setGender("male")}
-                  className="px-2"
-                >
-                  Nam
-                </Checkbox>
-                <Checkbox
-                  checked={gender === "female"}
-                  onChange={() => setGender("female")}
-                >
-                  Nữ
-                </Checkbox>
-              </Box>
-              <textarea
-                className="rounded-lg"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                placeholder="Tuổi"
-                style={{
-                  height: "45px",
-                  width: "100%",
-                  fontSize: "16px",
-                  resize: "none",
-                  padding: "12px",
-                  boxSizing: "border-box",
-                  border: "2px solid #0ebeb8",
-                }}
-              />
+          <Box mt={4} pb={4}>
+            <div className="px-10">
+              <div className="flex flex-col space-y-4">
+                <textarea
+                  className="rounded-lg"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Tên người dùng"
+                  style={{
+                    height: "45px",
+                    width: "100%",
+                    fontSize: "16px",
+                    resize: "none",
+                    padding: "12px",
+                    border: "2px solid #0ebeb8",
+                  }}
+                />
+                <Box flex flexDirection="row" className="space-x-2">
+                  <Checkbox
+                    checked={gender === "male"}
+                    onChange={() => setGender("male")}
+                    className="px-2"
+                  >
+                    Nam
+                  </Checkbox>
+                  <Checkbox
+                    checked={gender === "female"}
+                    onChange={() => setGender("female")}
+                  >
+                    Nữ
+                  </Checkbox>
+                </Box>
+                <textarea
+                  className="rounded-lg"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  placeholder="Tuổi"
+                  style={{
+                    height: "45px",
+                    width: "100%",
+                    fontSize: "16px",
+                    resize: "none",
+                    padding: "12px",
+                    boxSizing: "border-box",
+                    border: "2px solid #0ebeb8",
+                  }}
+                />
 
-              <textarea
-                className="rounded-lg"
-                value={phone}
-                readOnly
-                // onChange={(e) => setPhoneNumber(e.target.value)}
-                placeholder="Số điện thoại"
-                style={{
-                  height: "45px",
-                  width: "100%",
-                  fontSize: "16px",
-                  resize: "none",
-                  padding: "12px",
-                  boxSizing: "border-box",
-                  border: "2px solid #0ebeb8",
-                }}
-              />
-              <textarea
-                className="rounded-lg"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="@mail"
-                style={{
-                  height: "45px",
-                  width: "100%",
-                  fontSize: "16px",
-                  resize: "none",
-                  padding: "12px",
-                  boxSizing: "border-box",
-                  border: "2px solid #0ebeb8",
-                }}
-              />
-              <textarea
-                className="rounded-lg"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Địa chỉ"
-                style={{
-                  height: "45px",
-                  width: "100%",
-                  fontSize: "16px",
-                  resize: "none",
-                  padding: "12px",
-                  boxSizing: "border-box",
-                  border: "2px solid #0ebeb8",
-                }}
-              />
-              <textarea
-                className="rounded-lg"
-                value={allergy}
-                onChange={(e) => setAllergy(e.target.value)}
-                placeholder="Dị ứng"
-                style={{
-                  height: "80px",
-                  width: "100%",
-                  fontSize: "16px",
-                  resize: "none",
-                  padding: "12px",
-                  boxSizing: "border-box",
-                  overflow: "auto",
-                  whiteSpace: "pre-wrap",
-                  wordWrap: "break-word",
-                  border: "2px solid #0ebeb8",
-                }}
-              />
-              <textarea
-                flex
-                alignItems="start"
-                value={underlyingdisease}
-                className="rounded-lg"
-                onChange={(e) => setUnderlyingdisease(e.target.value)}
-                placeholder="Bệnh nền"
-                style={{
-                  height: "80px",
-                  width: "100%",
-                  fontSize: "16px",
-                  resize: "none",
-                  padding: "12px",
-                  boxSizing: "border-box",
-                  overflow: "auto",
-                  whiteSpace: "pre-wrap",
-                  wordWrap: "break-word",
-                  border: "2px solid #0ebeb8",
-                }}
-              />
-              <div className="flex items-center justify-center space-x-4">
-                <Box
-                  style={{ backgroundColor: "#0cb2ac" }}
-                  className="rounded-3xl px-4"
+                <textarea
+                  className="rounded-lg"
+                  value={phone}
+                  readOnly
+                  // onChange={(e) => setPhoneNumber(e.target.value)}
+                  placeholder="Số điện thoại"
+                  style={{
+                    height: "45px",
+                    width: "100%",
+                    fontSize: "16px",
+                    resize: "none",
+                    padding: "12px",
+                    boxSizing: "border-box",
+                    border: "2px solid #0ebeb8",
+                  }}
+                />
+                <textarea
+                  className="rounded-lg"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="@mail"
+                  style={{
+                    height: "45px",
+                    width: "100%",
+                    fontSize: "16px",
+                    resize: "none",
+                    padding: "12px",
+                    boxSizing: "border-box",
+                    border: "2px solid #0ebeb8",
+                  }}
+                />
+                <textarea
+                  className="rounded-lg"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Địa chỉ"
+                  style={{
+                    height: "45px",
+                    width: "100%",
+                    fontSize: "16px",
+                    resize: "none",
+                    padding: "12px",
+                    boxSizing: "border-box",
+                    border: "2px solid #0ebeb8",
+                  }}
+                />
+                <textarea
+                  className="rounded-lg"
+                  value={allergy}
+                  onChange={(e) => setAllergy(e.target.value)}
+                  placeholder="Dị ứng"
+                  style={{
+                    height: "80px",
+                    width: "100%",
+                    fontSize: "16px",
+                    resize: "none",
+                    padding: "12px",
+                    boxSizing: "border-box",
+                    overflow: "auto",
+                    whiteSpace: "pre-wrap",
+                    wordWrap: "break-word",
+                    border: "2px solid #0ebeb8",
+                  }}
+                />
+                <textarea
                   flex
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Text className="px-4 py-4 text-white" onClick={handleSubmit}>
-                    Lưu thông tin
-                  </Text>
-                </Box>
-                <Box
-                  style={{ backgroundColor: "#0cb2ac" }}
-                  className="rounded-3xl space-x-1"
-                  flex
-                  alignItems="center"
-                  justifyContent="center"
-                  variant="secondary"
-                >
-                  <Text className="px-4 py-4 text-white" onClick={handleBack}>
-                    Trở về
-                  </Text>
-                </Box>
+                  alignItems="start"
+                  value={underlyingdisease}
+                  className="rounded-lg"
+                  onChange={(e) => setUnderlyingdisease(e.target.value)}
+                  placeholder="Bệnh nền"
+                  style={{
+                    height: "80px",
+                    width: "100%",
+                    fontSize: "16px",
+                    resize: "none",
+                    padding: "12px",
+                    boxSizing: "border-box",
+                    overflow: "auto",
+                    whiteSpace: "pre-wrap",
+                    wordWrap: "break-word",
+                    border: "2px solid #0ebeb8",
+                  }}
+                />
+                <div className="flex items-center justify-center space-x-4">
+                  <Box
+                    style={{ backgroundColor: "#0cb2ac" }}
+                    className="rounded-3xl px-4"
+                    flex
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Text
+                      className="px-4 py-4 text-white"
+                      onClick={handleSubmit}
+                    >
+                      Lưu thông tin
+                    </Text>
+                  </Box>
+                  <Box
+                    style={{ backgroundColor: "#0cb2ac" }}
+                    className="rounded-3xl space-x-1"
+                    flex
+                    alignItems="center"
+                    justifyContent="center"
+                    variant="secondary"
+                  >
+                    <Text className="px-4 py-4 text-white" onClick={handleBack}>
+                      Trở về
+                    </Text>
+                  </Box>
+                </div>
               </div>
             </div>
-          </div>
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </Page>
   );
 };
 
