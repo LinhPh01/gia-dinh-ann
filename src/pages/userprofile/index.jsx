@@ -10,7 +10,7 @@ import Profile from "./profile";
 
 const PageUser1 = () => {
   return (
-    <Page className="relative flex-1 flex flex-col bg-page-color">
+    <Page className="relative flex-1 flex flex-col bg-page-color zalo-mini">
       <HeaderUser />
       <Box className="flex-1 overflow-auto">
         <Profile />

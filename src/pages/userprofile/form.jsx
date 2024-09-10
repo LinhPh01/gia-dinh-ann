@@ -415,7 +415,7 @@ const FormPage = () => {
   };
 
   return (
-    <Box className="bg-page-color">
+    <Box className="bg-page-color zalo-mini ">
       <HeaderEdit />
       <Box mx={4} pb={10} mt-4>
         <Box

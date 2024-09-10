@@ -119,60 +119,64 @@ const Banneruser = () => {
   // Kiểm tra trạng thái từ localStorage khi khởi động ứng dụng
 
   //
-  const processPhoneNumber = (phone) => {
-    if (phone.startsWith("84")) {
-      return "0" + phone.substring(2);
-    }
-    return phone;
-  };
+  // const processPhoneNumber = (phone) => {
+  //   if (phone.startsWith("84")) {
+  //     return "0" + phone.substring(2);
+  //   }
+  //   return phone;
+  // };
   // lấy sdt
-  const fetchDataLoad = async () => {
-    getAccessToken({
-      success: (userAccessToken) => {
-        console.log("Access token:", userAccessToken);
-        getPhoneNumber({
-          success: async (data) => {
-            let { token } = data;
-            console.log("Token:", token);
-            try {
-              const response = await fetch(
-                "https://graph.zalo.me/v2.0/me/info",
-                {
-                  headers: {
-                    access_token: userAccessToken,
-                    code: token,
-                    secret_key: secretKey,
-                  },
-                }
-              );
+  // const fetchDataLoad = async () => {
+  //   getAccessToken({
+  //     success: (userAccessToken) => {
+  //       console.log("Access token:", userAccessToken);
+  //       getPhoneNumber({
+  //         success: async (data) => {
+  //           let { token } = data;
+  //           console.log("Token:", token);
+  //           try {
+  //             const response = await fetch(
+  //               "https://graph.zalo.me/v2.0/me/info",
+  //               {
+  //                 headers: {
+  //                   access_token: userAccessToken,
+  //                   code: token,
+  //                   secret_key: secretKey,
+  //                 },
+  //               }
+  //             );
 
-              if (!response.ok) {
-                throw new Error(`lỗi response: ${response.status}`);
-              }
+  //             if (!response.ok) {
+  //               throw new Error(`lỗi response: ${response.status}`);
+  //             }
 
-              let formattedPhoneNumber = "0931305101";
+  //             let formattedPhoneNumber = "0931305101";
 
-              setPhoneNumber(formattedPhoneNumber);
+  //             setPhoneNumber(formattedPhoneNumber);
 
-              localStorage.setItem("phone", formattedPhoneNumber);
-              console.log("Cập nhật sdt:", formattedPhoneNumber);
-              fetchUserPointAndRank(formattedPhoneNumber);
-            } catch (error) {
-              console.error("Lỗi khi gọi API: ", error);
-            }
-          },
-          fail: (error) => {
-            console.log(error);
-          },
-        });
-      },
-      fail: (error) => {
-        console.log(error);
-      },
-    });
-  };
+  //             localStorage.setItem("phone", formattedPhoneNumber);
+  //             console.log("Cập nhật sdt:", formattedPhoneNumber);
+  //             fetchUserPointAndRank(formattedPhoneNumber);
+  //           } catch (error) {
+  //             console.error("Lỗi khi gọi API: ", error);
+  //           }
+  //         },
+  //         fail: (error) => {
+  //           console.log(error);
+  //         },
+  //       });
+  //     },
+  //     fail: (error) => {
+  //       console.log(error);
+  //     },
+  //   });
+  // };
   //lấy điểm
-  const fetchUserPointAndRank = async (phone) => {
+
+  const fetchUserPointAndRank = async () => {
+    const formattedPhoneNumber = "0931305101";
+    setPhoneNumber(formattedPhoneNumber);
+    localStorage.setItem("phone", formattedPhoneNumber);
     try {
       // Gọi API để lấy thông tin người dùng và điểm
       const userResponse = await fetch(
@@ -303,105 +307,101 @@ const Banneruser = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const checkPermissions = () => {
-  //     getSetting({
-  //       success: (data) => {
-  //         // Kiểm tra quyền truy cập cụ thể cho số điện thoại
-  //         const isPhoneAuthorized =
-  //           data.authSetting && data.authSetting["scope.userPhonenumber"];
+  useEffect(() => {
+    // const checkPermissions = () => {
+    //   getSetting({
+    //     success: (data) => {
+    //       // Kiểm tra quyền truy cập cụ thể cho số điện thoại
+    //       const isPhoneAuthorized =
+    //         data.authSetting && data.authSetting["scope.userPhonenumber"];
 
-  //         console.log("Cài đặt quyền truy cập:", data.authSetting);
+    //       console.log("Cài đặt quyền truy cập:", data.authSetting);
 
-  //         if (isPhoneAuthorized) {
-  //           // Đã cấp quyền truy cập số điện thoại
-  //           const storedUserData = localStorage.getItem("userData");
+    //       if (isPhoneAuthorized) {
+    // Đã cấp quyền truy cập số điện thoại
+    const storedUserData = localStorage.getItem("userData");
 
-  //           if (storedUserData) {
-  //             try {
-  //               const userData = JSON.parse(storedUserData);
-  //               const { phone, id, name, pointTotal, rank, lastUpdated } =
-  //                 userData;
-  //               const currentTime = new Date().getTime();
+    if (storedUserData) {
+      try {
+        const userData = JSON.parse(storedUserData);
+        const { phone, id, name, pointTotal, rank, lastUpdated } = userData;
+        const currentTime = new Date().getTime();
 
-  //               if (
-  //                 phone &&
-  //                 id &&
-  //                 pointTotal &&
-  //                 rank &&
-  //                 currentTime - lastUpdated < 60000
-  //               ) {
-  //                 setPhoneNumber(phone);
-  //                 setId(id);
-  //                 setName(name || null);
-  //                 setPointTotal(pointTotal);
-  //                 setRanks(rank);
+        if (
+          phone &&
+          id &&
+          pointTotal &&
+          rank &&
+          currentTime - lastUpdated < 60000
+        ) {
+          setPhoneNumber(phone);
+          setId(id);
+          setName(name || null);
+          setPointTotal(pointTotal);
+          setRanks(rank);
 
-  //                 console.log("Dữ liệu từ localStorage:");
-  //                 console.log("Phone:", phone);
-  //                 console.log("ID:", id);
-  //                 console.log("Name:", name || null);
-  //                 console.log("Point Total:", pointTotal);
-  //                 console.log("Rank:", rank);
-  //               } else {
-  //                 // Xử lý trường hợp không đủ dữ liệu hoặc dữ liệu đã cũ
-  //                 fetchUserPointAndRank(phone);
-  //               }
-  //             } catch (e) {
-  //               console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
-  //               fetchUserPointAndRank(phone);
-  //             }
-  //           } else {
-  //             console.log(
-  //               "Không tìm thấy dữ liệu người dùng trong localStorage."
-  //             );
-  //             fetchUserPointAndRank(phone);
-  //           }
-  //         } else {
-  //           console.log("Chưa cấp quyền truy cập số điện thoại.");
-  //           // Nếu không có quyền, xoá dữ liệu và thiết lập lại giao diện
-  //           localStorage.removeItem("userData");
-  //           localStorage.removeItem("phone");
-  //           setPhoneNumber(null);
-  //         }
-  //       },
-  //       fail: (error) => {
-  //         console.log("Lỗi khi gọi getSetting:", error);
-  //       },
-  //     });
-  //   };
+          console.log("Dữ liệu từ localStorage:");
+          console.log("Phone:", phone);
+          console.log("ID:", id);
+          console.log("Name:", name || null);
+          console.log("Point Total:", pointTotal);
+          console.log("Rank:", rank);
+        } else {
+          // Xử lý trường hợp không đủ dữ liệu hoặc dữ liệu đã cũ
+          fetchUserPointAndRank();
+        }
+      } catch (e) {
+        console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
+        fetchUserPointAndRank();
+      }
+    } else {
+      console.log("Không tìm thấy dữ liệu người dùng trong localStorage.");
+      fetchUserPointAndRank();
+    }
+    // } else {
+    //   console.log("Chưa cấp quyền truy cập số điện thoại.");
+    //   // Nếu không có quyền, xoá dữ liệu và thiết lập lại giao diện
+    //   localStorage.removeItem("userData");
+    //   setPhoneNumber(null);
+    // }
+    //     },
+    //     fail: (error) => {
+    //       console.log("Lỗi khi gọi getSetting:", error);
+    //     },
+    //   });
+    // };
 
-  //   // Hàm cập nhật dữ liệu từ API mỗi phút một lần
-  //   const updateData = () => {
-  //     const storedUserData = localStorage.getItem("userData");
-  //     if (storedUserData) {
-  //       try {
-  //         const { phone } = JSON.parse(storedUserData);
-  //         if (phone) {
-  //           fetchUserPointAndRank(phone);
-  //         }
-  //       } catch (e) {
-  //         console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
-  //       }
-  //     }
-  //   };
+    // Hàm cập nhật dữ liệu từ API mỗi phút một lần
+    // const updateData = () => {
+    //   const storedUserData = localStorage.getItem("userData");
+    //   if (storedUserData) {
+    //     try {
+    //       const { phone } = JSON.parse(storedUserData);
+    //       if (phone) {
+    //         fetchUserPointAndRank();
+    //       }
+    //     } catch (e) {
+    //       console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
+    //     }
+    //   }
+    // };
 
-  //   checkPermissions(); // Kiểm tra quyền truy cập khi component mount
+    // checkPermissions(); // Kiểm tra quyền truy cập khi component mount
 
-  //   const intervalId = setInterval(() => {
-  //     checkPermissions(); // Kiểm tra quyền truy cập mỗi 10 giây
-  //   }, 5000); // 10 giây
+    // const intervalId = setInterval(() => {
+    //   checkPermissions(); // Kiểm tra quyền truy cập mỗi 10 giây
+    // }, 5000); // 10 giây
 
-  //   const updateIntervalId = setInterval(() => {
-  //     updateData();
-  //   }, 60000); // 60 giây
+    // const updateIntervalId = setInterval(() => {
+    //   updateData();
+    // }, 60000); // 60 giây
 
-  //   // Xoá interval khi component bị unmount
-  //   return () => {
-  //     clearInterval(intervalId);
-  //     clearInterval(updateIntervalId);
-  //   };
-  // }, []);
+    // // Xoá interval khi component bị unmount
+    // return () => {
+    //   clearInterval(intervalId);
+    //   clearInterval(updateIntervalId);
+    // };
+  }, []);
   // const checkPermissions = () => {
   //   getSetting({
   //     success: (data) => {
@@ -494,7 +494,7 @@ const Banneruser = () => {
   // }, [isAuthorized, phone]);
   //
   const handleLogin = () => {
-    fetchDataLoad();
+    fetchUserPointAndRank();
   };
 
   const sdt = phone;
@@ -507,7 +507,7 @@ const Banneruser = () => {
     >
       {/* {showPopup && <Popup onAgree={handleAgree} onDisagree={handleDisagree} />} */}
 
-      <div>
+      <div className="">
         <div className="px-4 pt-1">
           {!isFollowed || !phone ? (
             <Box className="bg-page-color" pb={4}>

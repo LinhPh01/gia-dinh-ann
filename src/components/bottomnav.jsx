@@ -49,7 +49,7 @@ const BottomNav = () => {
           //   break;
         }
       }}
-      className="z-50"
+      className="z-50 zalo-mini bottom-nav-container"
     >
       <BottomNavigation.Item
         key="home"

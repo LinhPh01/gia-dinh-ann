@@ -226,3 +226,52 @@ textarea:focus {
   border-radius: 10px;
   /* Thêm các thuộc tính CSS khác cho popup của bạn */
 }
+
+.zalo-mini {
+  width: 700px; /* Kích thước chiều rộng mong muốn của ứng dụng */
+  max-width: 100%;
+  height: auto; /* Cho phép chiều cao tự điều chỉnh */
+  background-color: #f0f9ff; /* Màu nền */
+  margin: 0 auto; /* Căn giữa phần tử trên màn hình */
+}
+
+@media (max-width: 768px) {
+  .zalo-mini {
+    width: 100%;
+    height: auto;
+  }
+}
+.bottom-nav-container {
+  position: fixed; /* Hoặc absolute, tùy thuộc vào bố cục của bạn */
+  /* left: 27%; */
+  right: 1%;
+  width: 700px; /* Kích thước chiều rộng mong muốn của ứng dụng */
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* .toptop {
+  padding-top: 1rem;
+}
+@media (max-width: 768px) {
+  .toptop {
+    padding-top: 4rem;
+  }
+}
+.toptop1 {
+  padding-top: 3rem;
+}
+@media (max-width: 768px) {
+  .toptop1 {
+    padding-top: 6rem;
+  }
+}
+
+.bgf {
+  background-color: #f0f9ff;
+}
+@media (max-width: 768px) {
+  .bgf {
+    background-color: #f0f9ff;
+  }
+} */

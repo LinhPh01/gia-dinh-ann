@@ -12,7 +12,7 @@ import Banneruser from "./banneruser";
 
 const HomePage = () => {
   return (
-    <Page className="relative flex-1 flex flex-col bg-page-color">
+    <Page className="relative flex-1 flex flex-col bg-page-color zalo-mini ">
       <Headerr />
       <Box className="flex-1 overflow-auto">
         <RecoilRoot>
