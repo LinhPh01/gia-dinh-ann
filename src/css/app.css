@@ -1,0 +1,228 @@
+.page {
+  padding: 16px 16px 96px 16px;
+}
+.bg-page-color {
+  background-color: #f0f9ff;
+}
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: unset !important;
+  min-height: unset !important;
+}
+.zaui-header {
+  position: sticky;
+  background-color: #f0f9ff;
+}
+.zaui-header::after {
+  content: none;
+}
+
+.section-container {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.zaui-list-item {
+  cursor: pointer;
+}
+.zaui-text-xxSmall {
+  line-height: 16px;
+}
+
+.zaui-icon {
+  color: #0ebeb8;
+}
+.text-icon {
+  color: #0ebeb8;
+}
+
+.bottom-nav-item-active {
+  color: #0ebeb8;
+
+  /* Màu xanh dương khi được chọn */
+}
+.bottom-nav-icon-active {
+  color: #0ebeb8; /* Màu xanh dương khi icon được chọn */
+}
+.button-nav-item-active {
+  color: #0ebeb8;
+}
+
+.text-custom-teal {
+  color: #0cb2ac;
+}
+.zui-box-custom-bg {
+  background-image: linear-gradient(to bottom right, #0cb2ac, #fdbb2d);
+}
+
+.zui-custom-bg-text {
+  background-image: linear-gradient(to right, #41a197, #31453d);
+}
+.zui-bg-sheet {
+  background-image: linear-gradient(to right, #0cb2ac, #fdbb2d);
+}
+.text-custom {
+  color: #c4c4c4;
+}
+
+.button-1 {
+  background-color: white; /* Màu nền */
+  color: black; /* Màu chữ */
+  border: 1px solid black;
+}
+
+.button:active {
+  background-color: #0ebeb8; /* Màu nền khi được click */
+}
+.button-1:active {
+  background-color: #0ebeb8; /* Màu nền khi được click */
+}
+.button-2:active {
+  background-color: #0ebeb8; /* Màu nền khi được click */
+}
+.button-2 {
+  background-color: white; /* Màu nền */
+  color: black; /* Màu chữ */
+  border: 1px solid black;
+}
+.button {
+  background-color: #0ebeb8; /* Màu nền */
+  color: white; /* Màu chữ */
+  border: 1px solid black;
+}
+
+.bt-click {
+  background-color: #0ebeb8; /* Màu nền */
+  color: white; /* Màu chữ */
+}
+
+.zaui-sheet-content-handler-wrapper {
+  touch-action: none;
+}
+
+textarea:focus {
+  background-color: #0ebeb8;
+  outline: 2px solid #0ebeb8;
+  /* Thay #your_custom_color bằng mã màu bạn muốn sử dụng, ví dụ: #00FF00 */
+}
+
+.custom-checkbox .zmp-checkmark {
+  border: 2px solid #0ebeb8; /* Đổi màu viền khi checked */
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .zmp-checkmark::before {
+  background-color: #0ebeb8; /* Đổi màu nền khi checked */
+  border-color: #0ebeb8; /* Đổi màu viền khi checked */
+}
+
+.swiper-container {
+  height: 360px; /* Điều chỉnh chiều cao mong muốn */
+}
+.image-container {
+  width: 180px;
+  height: 280px; /* Điều chỉnh theo kích thước bạn mong muốn */
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fixed-two-lines {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.2em;
+  height: 2.4em;
+  white-space: pre-wrap; /* Giữ nguyên khoảng trắng và xuống dòng */
+}
+/* barcode */
+
+@keyframes bounceIn {
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* listinvest */
+
+.barcode-container.loader {
+  animation: loader 1s ease-out;
+}
+.listinvest-container.slideIn {
+  animation: slideIn 0.7s ease-out;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #25b09b;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l3 0.8s infinite linear;
+  margin: auto;
+}
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.popup {
+  position: fixed; /* Hoặc absolute, tùy thuộc vào bố cục của bạn */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Đặt giá trị z-index cao để đảm bảo popup hiển thị trên cùng */
+  background: rgba(0, 0, 0, 0.5); /* Màu nền mờ */
+  padding: 20px;
+  border-radius: 10px;
+  /* Thêm các thuộc tính CSS khác cho popup của bạn */
+}

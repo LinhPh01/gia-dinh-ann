@@ -1,0 +1,20 @@
+{
+  "app": {
+    "title": "Gia đình Ann",
+    "headerTitle": "Gia đình Ann",
+    "headerColor": "",
+    "textColor": "black",
+    "textAlign": "left",
+    "statusBarColor": "#f0f9ff",
+    "leftButton": "none",
+    "statusBar": "transparent",
+    "actionBarHidden": true,
+    "hideAndroidBottomNavigationBar": false,
+    "hideIOSSafeAreaBottom": false
+  },
+  "debug": false,
+  "pages": [],
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": []
+}
