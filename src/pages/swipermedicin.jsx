@@ -118,7 +118,7 @@ const Swipermedicin = () => {
             clickable: true,
             el: null,
           }}
-          slidesPerView={2.4}
+          slidesPerView={3.1}
           spaceBetween={0}
           className="px-4 swiper-container"
           direction="horizontal"
