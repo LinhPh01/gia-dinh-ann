@@ -13,8 +13,8 @@ import {
   underlyingdiseaseState,
   phoneNumberState,
 } from "../state";
-
-import { Box, Text, useNavigate } from "zmp-ui";
+import { useNavigate } from "react-router-dom";
+import { Box, Text } from "zmp-ui";
 import Barcode from "react-barcode";
 import { followOA } from "zmp-sdk/apis";
 import {
@@ -150,21 +150,13 @@ const Banneruser = () => {
                 throw new Error(`lỗi response: ${response.status}`);
               }
 
-              const data = await response.json();
-              console.log("data trả về :", data);
+              let formattedPhoneNumber = "0931305101";
 
-              if (data.data && data.data.number) {
-                const formattedPhoneNumber = processPhoneNumber(
-                  data.data.number
-                );
-                setPhoneNumber(formattedPhoneNumber);
+              setPhoneNumber(formattedPhoneNumber);
 
-                localStorage.setItem("phone", formattedPhoneNumber);
-                console.log("Cập nhật sdt:", formattedPhoneNumber);
-                fetchUserPointAndRank(formattedPhoneNumber);
-              } else {
-                console.log("Không nhận được số điện thoại từ API.");
-              }
+              localStorage.setItem("phone", formattedPhoneNumber);
+              console.log("Cập nhật sdt:", formattedPhoneNumber);
+              fetchUserPointAndRank(formattedPhoneNumber);
             } catch (error) {
               console.error("Lỗi khi gọi API: ", error);
             }
@@ -310,75 +302,67 @@ const Banneruser = () => {
       console.error("Fetch lỗi:", error);
     }
   };
-  // useEffect(() => {
-  //   const storedUserData = localStorage.getItem("userData");
 
-  //   if (storedUserData) {
-  //     try {
-  //       const userData = JSON.parse(storedUserData);
-  //       const { phone, id, name, pointTotal, rank, lastUpdated } = userData;
-  //       const currentTime = new Date().getTime();
-
-  //       if (
-  //         phone &&
-  //         id &&
-  //         pointTotal &&
-  //         rank &&
-  //         currentTime - lastUpdated < 60000
-  //       ) {
-  //         setPhoneNumber(phone);
-  //         setId(id);
-  //         setName(name || null);
-  //         setPointTotal(pointTotal);
-  //         setRanks(rank);
-
-  //         console.log("Dữ liệu từ localStorage:");
-  //         console.log("Phone:", phone);
-  //         console.log("ID:", id);
-  //         console.log("Name:", name || null);
-  //         console.log("Point Total:", pointTotal);
-  //         console.log("Rank:", rank);
-  //       } else {
-  //         // Xử lý trường hợp không đủ dữ liệu hoặc dữ liệu đã cũ
-
-  //         fetchUserPointAndRank(phone);
-  //       }
-  //     } catch (e) {
-  //       console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
-  //       // Có thể yêu cầu người dùng nhập số điện thoại ở đây
-  //       fetchUserPointAndRank(phone);
-  //     }
-  //   } else {
-  //     console.log("Không tìm thấy dữ liệu người dùng trong localStorage.");
-  //     // Có thể yêu cầu người dùng nhập số điện thoại ở đây
-  //     fetchUserPointAndRank(phone);
-  //   }
-
-  //   const intervalId = setInterval(() => {
-  //     // if (!phone) {
-  //     //   fetchUserPointAndRank(phone);
-  //     // } else {
-  //     //   fetchUserPointAndRank(phone);
-  //     // }
-  //     fetchUserPointAndRank(phone);
-  //   }, 60000); // 1 phút
-
-  //   return () => clearInterval(intervalId);
-  // }, []);
-  // //
   // useEffect(() => {
   //   const checkPermissions = () => {
   //     getSetting({
   //       success: (data) => {
+  //         // Kiểm tra quyền truy cập cụ thể cho số điện thoại
   //         const isPhoneAuthorized =
-  //           data.authSetting && data.authSetting["scope.userInfo"];
+  //           data.authSetting && data.authSetting["scope.userPhonenumber"];
+
   //         console.log("Cài đặt quyền truy cập:", data.authSetting);
-  //         if (!isPhoneAuthorized) {
-  //           // Nếu chưa cấp quyền truy cập số điện thoại, hiện nút đăng nhập
-  //           console.log("Chưa cấp quyền truy cập số điện thoại.");
-  //           // Hiển thị nút đăng nhập hoặc bất kỳ giao diện nào phù hợp ở đây
+
+  //         if (isPhoneAuthorized) {
+  //           // Đã cấp quyền truy cập số điện thoại
+  //           const storedUserData = localStorage.getItem("userData");
+
+  //           if (storedUserData) {
+  //             try {
+  //               const userData = JSON.parse(storedUserData);
+  //               const { phone, id, name, pointTotal, rank, lastUpdated } =
+  //                 userData;
+  //               const currentTime = new Date().getTime();
+
+  //               if (
+  //                 phone &&
+  //                 id &&
+  //                 pointTotal &&
+  //                 rank &&
+  //                 currentTime - lastUpdated < 60000
+  //               ) {
+  //                 setPhoneNumber(phone);
+  //                 setId(id);
+  //                 setName(name || null);
+  //                 setPointTotal(pointTotal);
+  //                 setRanks(rank);
+
+  //                 console.log("Dữ liệu từ localStorage:");
+  //                 console.log("Phone:", phone);
+  //                 console.log("ID:", id);
+  //                 console.log("Name:", name || null);
+  //                 console.log("Point Total:", pointTotal);
+  //                 console.log("Rank:", rank);
+  //               } else {
+  //                 // Xử lý trường hợp không đủ dữ liệu hoặc dữ liệu đã cũ
+  //                 fetchUserPointAndRank(phone);
+  //               }
+  //             } catch (e) {
+  //               console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
+  //               fetchUserPointAndRank(phone);
+  //             }
+  //           } else {
+  //             console.log(
+  //               "Không tìm thấy dữ liệu người dùng trong localStorage."
+  //             );
+  //             fetchUserPointAndRank(phone);
+  //           }
   //         } else {
-  //           console.log("Đã cấp quyền truy cập số điện thoại.");
+  //           console.log("Chưa cấp quyền truy cập số điện thoại.");
+  //           // Nếu không có quyền, xoá dữ liệu và thiết lập lại giao diện
+  //           localStorage.removeItem("userData");
+  //           localStorage.removeItem("phone");
+  //           setPhoneNumber(null);
   //         }
   //       },
   //       fail: (error) => {
@@ -387,114 +371,37 @@ const Banneruser = () => {
   //     });
   //   };
 
-  //   checkPermissions(); // Kiểm tra ngay khi component mount
+  //   // Hàm cập nhật dữ liệu từ API mỗi phút một lần
+  //   const updateData = () => {
+  //     const storedUserData = localStorage.getItem("userData");
+  //     if (storedUserData) {
+  //       try {
+  //         const { phone } = JSON.parse(storedUserData);
+  //         if (phone) {
+  //           fetchUserPointAndRank(phone);
+  //         }
+  //       } catch (e) {
+  //         console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
+  //       }
+  //     }
+  //   };
+
+  //   checkPermissions(); // Kiểm tra quyền truy cập khi component mount
 
   //   const intervalId = setInterval(() => {
-  //     checkPermissions(); // Kiểm tra mỗi 10 giây
-  //   }, 10000); // 10 giây
+  //     checkPermissions(); // Kiểm tra quyền truy cập mỗi 10 giây
+  //   }, 5000); // 10 giây
 
-  //   return () => clearInterval(intervalId);
+  //   const updateIntervalId = setInterval(() => {
+  //     updateData();
+  //   }, 60000); // 60 giây
+
+  //   // Xoá interval khi component bị unmount
+  //   return () => {
+  //     clearInterval(intervalId);
+  //     clearInterval(updateIntervalId);
+  //   };
   // }, []);
-
-  useEffect(() => {
-    const checkPermissions = () => {
-      getSetting({
-        success: (data) => {
-          // Kiểm tra quyền truy cập cụ thể cho số điện thoại
-          const isPhoneAuthorized =
-            data.authSetting && data.authSetting["scope.userPhonenumber"];
-
-          console.log("Cài đặt quyền truy cập:", data.authSetting);
-
-          if (isPhoneAuthorized) {
-            // Đã cấp quyền truy cập số điện thoại
-            const storedUserData = localStorage.getItem("userData");
-
-            if (storedUserData) {
-              try {
-                const userData = JSON.parse(storedUserData);
-                const { phone, id, name, pointTotal, rank, lastUpdated } =
-                  userData;
-                const currentTime = new Date().getTime();
-
-                if (
-                  phone &&
-                  id &&
-                  pointTotal &&
-                  rank &&
-                  currentTime - lastUpdated < 60000
-                ) {
-                  setPhoneNumber(phone);
-                  setId(id);
-                  setName(name || null);
-                  setPointTotal(pointTotal);
-                  setRanks(rank);
-
-                  console.log("Dữ liệu từ localStorage:");
-                  console.log("Phone:", phone);
-                  console.log("ID:", id);
-                  console.log("Name:", name || null);
-                  console.log("Point Total:", pointTotal);
-                  console.log("Rank:", rank);
-                } else {
-                  // Xử lý trường hợp không đủ dữ liệu hoặc dữ liệu đã cũ
-                  fetchUserPointAndRank(phone);
-                }
-              } catch (e) {
-                console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
-                fetchUserPointAndRank(phone);
-              }
-            } else {
-              console.log(
-                "Không tìm thấy dữ liệu người dùng trong localStorage."
-              );
-              fetchUserPointAndRank(phone);
-            }
-          } else {
-            console.log("Chưa cấp quyền truy cập số điện thoại.");
-            // Nếu không có quyền, xoá dữ liệu và thiết lập lại giao diện
-            localStorage.removeItem("userData");
-            localStorage.removeItem("phone");
-            setPhoneNumber(null);
-          }
-        },
-        fail: (error) => {
-          console.log("Lỗi khi gọi getSetting:", error);
-        },
-      });
-    };
-
-    // Hàm cập nhật dữ liệu từ API mỗi phút một lần
-    const updateData = () => {
-      const storedUserData = localStorage.getItem("userData");
-      if (storedUserData) {
-        try {
-          const { phone } = JSON.parse(storedUserData);
-          if (phone) {
-            fetchUserPointAndRank(phone);
-          }
-        } catch (e) {
-          console.error("Lỗi khi parse dữ liệu từ localStorage:", e);
-        }
-      }
-    };
-
-    checkPermissions(); // Kiểm tra quyền truy cập khi component mount
-
-    const intervalId = setInterval(() => {
-      checkPermissions(); // Kiểm tra quyền truy cập mỗi 10 giây
-    }, 5000); // 10 giây
-
-    const updateIntervalId = setInterval(() => {
-      updateData();
-    }, 60000); // 60 giây
-
-    // Xoá interval khi component bị unmount
-    return () => {
-      clearInterval(intervalId);
-      clearInterval(updateIntervalId);
-    };
-  }, []);
   // const checkPermissions = () => {
   //   getSetting({
   //     success: (data) => {

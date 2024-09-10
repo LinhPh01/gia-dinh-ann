@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Input,
-  Page,
-  Text,
-  useNavigate,
-  Header,
-  Icon,
-} from "zmp-ui";
-
+import { Box, Button, Input, Page, Text, Header, Icon } from "zmp-ui";
+import { useNavigate } from "react-router-dom";
 const Filehealth2 = () => {
   const navigate = useNavigate();
   return (

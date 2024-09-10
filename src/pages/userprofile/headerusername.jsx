@@ -1,6 +1,6 @@
 import React from "react";
-import { Header, Box, Text, useNavigate, Icon } from "zmp-ui";
-
+import { Header, Box, Text, Icon } from "zmp-ui";
+import { useNavigate } from "react-router-dom";
 const HeaderUser = () => {
   const navigate = useNavigate();
   return (

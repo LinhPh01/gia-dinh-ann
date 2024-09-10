@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, useSnackbar, Text, useNavigate } from "zmp-ui";
+import { Box, useSnackbar, Text } from "zmp-ui";
+import { useNavigate } from "react-router-dom";
 import Ann from "../../assets-src/Ann.svg";
 import care from "../../assets-src/care.svg";
 import call from "../../assets-src/Call.svg";

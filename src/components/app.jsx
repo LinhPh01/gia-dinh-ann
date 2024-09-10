@@ -1,6 +1,6 @@
 import React from "react";
-import { Route } from "react-router-dom";
-import { App, ZMPRouter, AnimationRoutes, SnackbarProvider } from "zmp-ui";
+import { BrowserRouter, Route } from "react-router-dom";
+import { App, AnimationRoutes, SnackbarProvider } from "zmp-ui";
 import { RecoilRoot } from "recoil";
 import HomePage from "../pages";
 import PageFile from "../pages/file";
@@ -13,14 +13,13 @@ import Filehealth from "../pages/userprofile/filehealth";
 import Filehealth2 from "../pages/userprofile/filehealth2";
 import Profile from "../pages/userprofile/profile";
 import BottomNav from "./bottomnav";
-import Popup from "../pages/popup";
 
 const MyApp = () => {
   return (
     <RecoilRoot>
       <App>
         <SnackbarProvider>
-          <ZMPRouter>
+          <BrowserRouter>
             <AnimationRoutes>
               <Route path="/" element={<HomePage></HomePage>}></Route>
               <Route
@@ -41,10 +40,9 @@ const MyApp = () => {
               <Route path="/form" element={<FormUser></FormUser>}></Route>
               <Route path="/file" element={<PageFile></PageFile>}></Route>
               <Route path="/gift" element={<PageGift></PageGift>}></Route>
-              <Route path="/popup" element={<Popup></Popup>}></Route>
             </AnimationRoutes>
             <BottomNav />
-          </ZMPRouter>
+          </BrowserRouter>
         </SnackbarProvider>
       </App>
     </RecoilRoot>
